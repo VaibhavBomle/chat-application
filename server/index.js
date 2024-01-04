@@ -1,12 +1,18 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 
 const router = require('./router')
 
 const app = express();
+app.use(cors({
+   origin: 'http://localhost:3000', // Allow requests from this origin
+   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+ }));
 const server = http.createServer(app);
 const io = socketio(server);
 
