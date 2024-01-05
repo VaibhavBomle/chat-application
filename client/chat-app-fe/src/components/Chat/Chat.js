@@ -12,11 +12,20 @@ const Chat = () => {
   const ENDPOINT = 'localhost:5000';
   useEffect(()=>{
     const nameOfPerson = searchParams.get('name');
-    const roomOfPerson = searchParams.get('room');
+    const roomName = searchParams.get('room');
     socket = io(ENDPOINT);
     console.log(socket);
     setName(nameOfPerson);
-    setRoom(roomOfPerson);
+    setRoom(roomName);
+    console.log("name =>",nameOfPerson)
+    socket.emit("join",{name : nameOfPerson,room: roomName},()=>{
+      // alert(error)
+
+    });
+    return () =>{
+      socket.emit('disconnect');
+      socket.off();
+    }
   },[ENDPOINT,searchParams.get('name')])
  
   return (
