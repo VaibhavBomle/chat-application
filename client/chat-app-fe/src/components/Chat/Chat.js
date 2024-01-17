@@ -32,7 +32,7 @@ const Chat = () => {
     return () =>{
       socket.emit('disconnect');
       socket.off();
-    }
+    } 
   },[ENDPOINT,searchParams.get('name')]);
 
   useEffect(() =>{
